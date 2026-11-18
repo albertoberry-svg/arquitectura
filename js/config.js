@@ -29,5 +29,5 @@ window.SG_CONFIG = {
   /* Endpoint del formulario. Vacío = modo demostración (valida y muestra la
      confirmación sin enviar nada). Para conectarlo, indica una URL que acepte
      POST con JSON (Formspree, Base44, función serverless, etc.). */
-  formEndpoint: ''
+  formEndpoint: '/api/contacto'
 };
