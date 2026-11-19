@@ -106,6 +106,61 @@
     noche: { o: [{ p: 20.4, o: 0 }, { p: 22.8, o: 1 }, { p: V_MAX, o: 1 }], t: AEREA_T }
   };
 
+  /* ===================== CASA 4 · EDIFICIO (cuatro clips encadenados) =====================
+     Vuelo continuo sin paso a la noche: avenida → terraza → salón → pasillo y cocina →
+     recibidor y dormitorio. Entre clips, corte invisible (cada clip empieza en el
+     último fotograma del anterior). Las capas de imagen (póster y alternativa) son:
+     aerea = fachada, terraza = terraza, salon = salón, noche = dormitorio. */
+  var EDIF = window.SG_CASA === 4;
+  if (EDIF) {
+    CLIP = [{ start: 0 }, { start: DUR }, { start: DUR * 2 }, { start: DUR * 3 }];
+    TOTAL = DUR * 4;                          // ≈ 40,2 s de vuelo
+    V_MAX = TOTAL + HOLD_OUT;
+    X = TOTAL + 99;                           // sin paso a la noche
+    COPIES = {
+      intro:      [{ p: V_MIN, o: 1, y: 0 }, { p: 0.6, o: 1, y: 0 }, { p: 2.0, o: 0, y: -40 }],
+      paisaje:    [{ p: 2.4, o: 0, y: 40 }, { p: 3.2, o: 1, y: 0 }, { p: 5.8, o: 1, y: 0 }, { p: 6.6, o: 0, y: -40 }],
+      terraza:    [{ p: 8.2, o: 0, y: 40 }, { p: 9.0, o: 1, y: 0 }, { p: 12.2, o: 1, y: 0 }, { p: 13.0, o: 0, y: -40 }],
+      salon:      [{ p: 15.0, o: 0, y: 40 }, { p: 15.8, o: 1, y: 0 }, { p: 18.8, o: 1, y: 0 }, { p: 19.6, o: 0, y: -40 }],
+      noche:      [{ p: 23.6, o: 0, y: 40 }, { p: 24.4, o: 1, y: 0 }, { p: 27.6, o: 1, y: 0 }, { p: 28.4, o: 0, y: -40 }],
+      dormitorio: [{ p: 33.4, o: 0, y: 40 }, { p: 34.2, o: 1, y: 0 }, { p: 37.2, o: 1, y: 0 }, { p: 38.0, o: 0, y: -40 }],
+      cierre:     [{ p: 38.6, o: 0, y: 40 }, { p: 39.6, o: 1, y: 0 }, { p: V_MAX, o: 1, y: 0 }]
+    };
+    SCENES = [
+      { from: V_MIN, go: V_MIN },   // Inicio
+      { from: 2.2, go: 4.4 },       // El edificio
+      { from: 7.6, go: 10.4 },      // Terraza
+      { from: 14.0, go: 17.0 },     // Salón
+      { from: 22.6, go: 25.6 },     // Cocina
+      { from: 32.4, go: 35.6 },     // Dormitorio
+      { from: 38.4, go: V_MAX }     // Tu proyecto
+    ];
+    DIM_VIDEO = [{ p: V_MIN, d: 0 }, { p: 37.8, d: 0 }, { p: 40.4, d: 0.3 }, { p: V_MAX, d: 0.32 }];
+    DIM_IMG = [
+      { p: V_MIN, d: 0 }, { p: 6.6, d: 0 }, { p: 7.2, d: 0.2 }, { p: 7.9, d: 0 },
+      { p: 12.7, d: 0 }, { p: 13.3, d: 0.2 }, { p: 13.9, d: 0 },
+      { p: 29.4, d: 0 }, { p: 30.2, d: 0.22 }, { p: 31.0, d: 0 },
+      { p: 37.8, d: 0 }, { p: 40.4, d: 0.32 }, { p: V_MAX, d: 0.32 }
+    ];
+    LAYERS = {
+      aerea: { o: [{ p: V_MIN, o: 1 }, { p: V_MAX, o: 1 }], t: [
+        { p: V_MIN, s: 1.03, x: 0, y: 0, b: 0 }, { p: 5.6, s: 1.14, x: 0, y: -1.5, b: 0 },
+        { p: 7.6, s: 1.34, x: 0, y: -3, b: 5 }, { p: V_MAX, s: 1.34, x: 0, y: -3, b: 5 }] },
+      terraza: {
+        o: [{ p: 6.6, o: 0 }, { p: 7.8, o: 1 }, { p: 13.4, o: 1 }, { p: 13.45, o: 0 }],
+        t: [{ p: 6.6, s: 1.2, x: 0, y: 0, b: 6 }, { p: 7.8, s: 1.1, x: 0, y: 0, b: 0 }, { p: 13.4, s: 1.0, x: -2, y: 0, b: 0 }]
+      },
+      salon: {
+        o: [{ p: 12.8, o: 0 }, { p: 13.8, o: 1 }, { p: 29.6, o: 1 }, { p: 30.8, o: 0 }],
+        t: [{ p: 12.8, s: 1.16, x: 2, y: 0, b: 6 }, { p: 13.8, s: 1.06, x: 0, y: 0, b: 0 }, { p: 29.6, s: 1.18, x: -3, y: 0, b: 0 }, { p: 30.8, s: 1.24, x: -4, y: 0, b: 5 }]
+      },
+      noche: {
+        o: [{ p: 29.8, o: 0 }, { p: 31.0, o: 1 }, { p: V_MAX, o: 1 }],
+        t: [{ p: 29.8, s: 1.16, x: 2, y: 0, b: 6 }, { p: 31.0, s: 1.08, x: 0, y: 0, b: 0 }, { p: V_MAX, s: 1.0, x: -1, y: 0, b: 0 }]
+      }
+    };
+  }
+
   /* ===================== UTILIDADES ===================== */
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function smooth(t) { return t * t * (3 - 2 * t); }
@@ -254,7 +309,7 @@
      solo cuando el usuario empieza a recorrer el hero (ahorra datos a quien
      llega desde un anuncio y no hace scroll). render() vuelve a llamar a next(). */
   var sd = useSD();
-  var LAZY_FROM = [0, 0.3, 6]; // V a partir del cual se pide cada clip en modo móvil
+  var LAZY_FROM = [0, 0.3, 6, 16]; // V a partir del cual se pide cada clip en modo móvil
   function next() {
     for (var i = 0; i < clips.length; i++) {
       if (!clips[i].state) {
@@ -324,8 +379,34 @@
     top = r.top + window.pageYOffset;
     range = Math.max(1, hero.offsetHeight - stage.offsetHeight);
   }
-  function pOf(v) { return (v - V_MIN) / (V_MAX - V_MIN); }
-  function target() { return V_MIN + clamp((window.pageYOffset - top) / range, 0, 1) * (V_MAX - V_MIN); }
+  /* Paso rápido (rampa de velocidad), casas 2-4: los clips generados con IA pierden algo de
+     continuidad al llegar a cada corte y al cruzar la cristalera hacia el salón. Esos segundos
+     de vuelo ocupan k veces menos recorrido de scroll, así que pasan en un instante; el resto
+     del vuelo se reparte el recorrido sobrante. (Aprobado por Alberto el 19-11; los efectos de
+     transición —negro, barrido, destello, pilar— se probaron y se descartaron.) */
+  var ZONES = [];
+  if ((window.SG_CASA || 1) !== 1) {
+    var CUTS = EDIF ? [CLIP[1].start, CLIP[2].start, CLIP[3].start] : [CLIP[1].start];
+    CUTS.forEach(function (c) { ZONES.push({ a: c - 2.0, b: c + 0.8, k: 2.5 }); });
+    ZONES.push({ a: CLIP[1].start + 3.5, b: CLIP[1].start + 7.0, k: 2.0 });   // cruce de la cristalera
+  }
+  function S(v) {   // recorrido (en "segundos de scroll") desde V_MIN hasta v
+    var s = v - V_MIN;
+    for (var z = 0; z < ZONES.length; z++) {
+      var Z = ZONES[z], o = clamp(Math.min(v, Z.b) - Z.a, 0, Z.b - Z.a);
+      s -= o * (1 - 1 / Z.k);
+    }
+    return s;
+  }
+  var S_TOT = S(V_MAX);
+  function pOf(v) { return S(v) / S_TOT; }
+  function vOf(p) {
+    if (!ZONES.length) return V_MIN + p * (V_MAX - V_MIN);
+    var lo = V_MIN, hi = V_MAX, goal = p * S_TOT;
+    for (var it = 0; it < 32; it++) { var mid = (lo + hi) / 2; if (S(mid) < goal) lo = mid; else hi = mid; }
+    return (lo + hi) / 2;
+  }
+  function target() { return vOf(clamp((window.pageYOffset - top) / range, 0, 1)); }
 
   /* ===================== RENDER ===================== */
   function hideImages() {
@@ -365,12 +446,19 @@
     var T = clamp(v, 0, TOTAL);
     var blurOk = desktopFx.matches;
 
-    // Opacidades de cada clip (apilados: 1 abajo, 3 arriba)
-    var o2 = ramp(T, CLIP[1].start - FRAME, CLIP[1].start + FRAME);          // corte 1→2: fundido de 2 fotogramas
-    var u = ramp(T, X, X + OVERLAP);                                          // paso 2→3
-    var o3 = smooth(ramp(T, X + OVERLAP * 0.22, X + OVERLAP * 0.8));
-    var need = [o2 < 1, o2 > 0 && o3 < 1, o3 > 0];
-    var op = [1, o2, o3];
+    // Opacidades de cada clip (apilados: 1 abajo, último arriba)
+    var need, op, u = 0;
+    if (EDIF) {
+      // cortes invisibles entre todos los clips (fundido de 2 fotogramas)
+      op = CLIP.map(function (c, i) { return i ? ramp(T, c.start - FRAME, c.start + FRAME) : 1; });
+      need = op.map(function (o, i) { return o > 0 && (i === op.length - 1 || op[i + 1] < 1); });
+    } else {
+      var o2 = ramp(T, CLIP[1].start - FRAME, CLIP[1].start + FRAME);          // corte 1→2: fundido de 2 fotogramas
+      u = ramp(T, X, X + OVERLAP);                                              // paso 2→3
+      var o3 = smooth(ramp(T, X + OVERLAP * 0.22, X + OVERLAP * 0.8));
+      need = [o2 < 1, o2 > 0 && o3 < 1, o3 > 0];
+      op = [1, o2, o3];
+    }
 
     var allReady = true, missing = null;
     for (var i = 0; i < clips.length; i++) {
@@ -391,14 +479,14 @@
     // Paso 2 → 3: el salón se acerca y se desenfoca, un destello cálido lo
     // envuelve y de él emerge la aérea, que se asienta desde un ligero zoom.
     var c2 = clips[1], c3 = clips[2];
-    if (u > 0 && u < 1) {
+    if (!EDIF && u > 0 && u < 1) {
       var s2 = 1 + 0.07 * smooth(u), s3 = 1.08 - 0.08 * smooth(u);
       c2.el.style.transform = 'scale(' + s2.toFixed(4) + ')';
       c3.el.style.transform = 'scale(' + s3.toFixed(4) + ')';
       c2.el.style.filter = blurOk ? 'blur(' + (9 * u).toFixed(2) + 'px) saturate(' + (1 + 0.25 * u).toFixed(3) + ')' : 'none';
       c3.el.style.filter = blurOk ? 'blur(' + (9 * (1 - u)).toFixed(2) + 'px)' : 'none';
       if (bloom) bloom.style.opacity = (0.62 * Math.sin(Math.PI * u)).toFixed(3);
-    } else {
+    } else if (c2 && c3) {
       c2.el.style.transform = c3.el.style.transform = 'none';
       c2.el.style.filter = c3.el.style.filter = 'none';
       if (bloom) bloom.style.opacity = '0';
@@ -545,6 +633,8 @@
   window.SG_HERO = {
     get mode() { return mode; },
     get v() { return current; },
+    rampa: ZONES,
+    pOf: function (v) { return pOf(v); }, vOf: function (p) { return vOf(p); },
     clips: clips,
     seekTimes: seekTimes,
     timeline: { total: TOTAL, vMin: V_MIN, vMax: V_MAX, clipStarts: CLIP.map(function (c) { return c.start; }) }
