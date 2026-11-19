@@ -256,9 +256,10 @@ h1 em, h2 em, h3 em, .scene__title em, .quote em, .form-ok__title em { font-weig
 .film__clip[data-clip="0"] { --fx: 58%; z-index: 1; }
 .film__clip[data-clip="1"] { --fx: 50%; z-index: 2; }
 .film__clip[data-clip="2"] { --fx: 58%; z-index: 3; }
+.film__clip[data-clip="3"] { --fx: 50%; z-index: 4; }
 /* Destello cálido del paso salón → noche */
 .film__bloom {
-  position: absolute; inset: 0; z-index: 4; opacity: 0; mix-blend-mode: screen;
+  position: absolute; inset: 0; z-index: 5; opacity: 0; mix-blend-mode: screen;
   background: radial-gradient(85% 75% at 55% 55%, rgba(255, 228, 184, .95), rgba(236, 186, 126, .55) 45%, rgba(196, 140, 82, 0) 82%);
 }
 .js .hero__loading {
@@ -572,3 +573,7 @@ figcaption span { display: block; font-size: var(--t-micro); letter-spacing: .24
 .card:hover .card__img img { transform: scale(1.03); }
 .card__cat { font-size: var(--t-micro); letter-spacing: .12em; text-transform: uppercase; color: var(--gris); }
 .studio__img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 60% 30%; border-radius: var(--radius); }
+
+/* Casa 4 · edificio: vuelo de 4 clips (~40 s), recorrido más largo */
+.js .hero.hero--edificio { height: 760vh; }
+@media (min-width: 900px) { .js .hero.hero--edificio { height: 1030vh; } }
