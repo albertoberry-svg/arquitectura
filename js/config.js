@@ -24,7 +24,7 @@ window.SG_CONFIG = {
   /* Etiquetas de medición y publicidad. Vacío = no se carga nada.
      Solo se cargan si el visitante las acepta en el aviso de cookies. */
   googleAdsId: 'AW-1038334780',   // etiqueta de Google (cuenta Sebastián Gil Trading); solo se carga con consentimiento
-  clarityId: '',     // ID de proyecto de Microsoft Clarity
+  clarityId: 'zg9jbyndxq',     // ID de proyecto de Microsoft Clarity (solo se carga con consentimiento de medición)
 
   /* Conversiones de Google Ads del estudio (send_to = ID/etiqueta). Solo se envían si el
      visitante aceptó la publicidad en el aviso de cookies. */
