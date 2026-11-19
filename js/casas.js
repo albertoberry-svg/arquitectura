@@ -1,5 +1,5 @@
 /* =========================================================================
-   CASAS DEL HERO · tres vuelos posibles
+   CASAS DEL HERO · vuelos posibles al entrar en la web
    -------------------------------------------------------------------------
    Casa 1 = ladera con olivos (archivos en assets/img/ y assets/video/v*)
    Casa 2 = acantilado en Mallorca (assets/img/casa2/, assets/video/casa2/)
@@ -7,19 +7,27 @@
    Casa 4 = edificio frente al mar (assets/img/casa4/, assets/video/casa4/, 4 clips)
             En casa4/ «aerea-noche» es el dormitorio (la capa de imagen se reutiliza).
 
-   Elección:
+   Elección (solo entre las CASAS_ACTIVAS):
    · Si el visitante aceptó cookies (medición o publicidad), se recuerda qué
      casas ha visto (localStorage, sin identificadores) y se le enseña una que
-     no haya visto; si ya vio las tres, una al azar distinta de la última.
+     no haya visto; si ya vio todas, una al azar distinta de la última.
    · Sin consentimiento no se guarda nada: casa al azar en cada visita.
-   · ?casa=1|2|3 en la URL fuerza una casa (para revisar).
+   · ?casa=1|2|3|4 en la URL enseña esa casa aunque no esté activa (para revisar).
 
    Se ejecuta en línea, justo después del hero y antes de hero.js, así que
    hero.js ya encuentra las rutas de la casa elegida.
    ========================================================================= */
 (function () {
   'use strict';
-  var N = 4, KEY = 'sg_casas_vistas', root = document.documentElement;
+
+  /* ===================== CASAS ACTIVAS =====================
+     Qué casas pueden salir al entrar en la web. Para quitar una, bórrala de la lista:
+       [1, 2, 3, 4]  → las cuatro (ladera, Mallorca, Sierra y edificio)
+       [1, 2, 3]     → todas menos el edificio
+       [3]           → solo la Sierra (sale siempre esa)                          */
+  var CASAS_ACTIVAS = [1, 2, 3, 4];
+
+  var KEY = 'sg_casas_vistas', root = document.documentElement;
 
   function consent() {
     try { var c = JSON.parse(localStorage.getItem('sg_cookies_v1')); return !!(c && (c.analytics || c.ads)); }
@@ -32,13 +40,17 @@
   function pick() {
     var m = /[?&]casa=([1-4])/.exec(location.search);
     if (m) return +m[1];
-    var all = [1, 2, 3, 4], ok = consent(), seen = ok ? readSeen() : { vistas: [], ultima: 0 };
+    var all = CASAS_ACTIVAS.filter(function (n, i, a) { return n >= 1 && n <= 4 && a.indexOf(n) === i; });
+    if (!all.length) all = [1];
+    var ok = consent(), seen = ok ? readSeen() : { vistas: [], ultima: 0 };
+    seen.vistas = seen.vistas.filter(function (n) { return all.indexOf(n) >= 0; });   // olvida casas desactivadas
     var pool = all.filter(function (n) { return seen.vistas.indexOf(n) < 0; });
     if (!pool.length) pool = all.filter(function (n) { return n !== seen.ultima; });
+    if (!pool.length) pool = all;                                                    // con una sola casa activa
     var n = pool[Math.floor(Math.random() * pool.length)];
     if (ok) {
       if (seen.vistas.indexOf(n) < 0) seen.vistas.push(n);
-      if (seen.vistas.length >= N) seen.vistas = [n];   // nuevo ciclo
+      if (seen.vistas.length >= all.length) seen.vistas = [n];   // nuevo ciclo
       seen.ultima = n;
       try { localStorage.setItem(KEY, JSON.stringify(seen)); } catch (e) {}
     }
