@@ -102,6 +102,7 @@
       form.hidden = true;
       ok.hidden = false;
       ok.focus();
+      if (window.SG_conv) window.SG_conv('formulario');
     }).catch(function () {
       status.textContent = 'No hemos podido enviar el mensaje. Inténtalo de nuevo o escríbenos por WhatsApp.';
     }).then(function () { submit.disabled = false; });

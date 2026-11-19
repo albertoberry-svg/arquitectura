@@ -22,6 +22,16 @@
       addScript(null, '(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","' + C.clarityId + '");');
     }
   }
+  /* Conversiones de Google Ads: solo si hay consentimiento de publicidad y la etiqueta está cargada. */
+  window.SG_conv = function (kind) {
+    var map = C.adsConversions || {};
+    if (!loaded.ads || typeof window.gtag !== 'function' || !map[kind]) return;
+    window.gtag('event', 'conversion', { send_to: map[kind], value: 1.0, currency: 'EUR', transport_type: 'beacon' });
+  };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"],a[href*="wa.me"],a[href*="api.whatsapp.com"]');
+    if (a) window.SG_conv('contacto');
+  }, true);
   var css = '.ck{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:560px;background:#14130F;color:#EFEAE2;padding:22px 24px;border-radius:2px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.5 Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif}'
     + '.ck h2{font:500 1.35rem/1.2 "Cormorant Garamond",Garamond,serif;margin:0 0 8px;color:#EFEAE2}.ck p{margin:0 0 14px;color:#B9AF9F;font-size:.875rem}.ck a{color:#C4A877}'
     + '.ck__row{display:flex;flex-wrap:wrap;gap:10px}.ck button{font:inherit;font-size:.875rem;padding:11px 18px;border:1px solid #C4A877;background:transparent;color:#EFEAE2;cursor:pointer;border-radius:2px}'

@@ -23,8 +23,15 @@ window.SG_CONFIG = {
 
   /* Etiquetas de medición y publicidad. Vacío = no se carga nada.
      Solo se cargan si el visitante las acepta en el aviso de cookies. */
-  googleAdsId: '',   // p. ej. 'AW-1234567890'
+  googleAdsId: 'AW-1038334780',   // etiqueta de Google (cuenta Sebastián Gil Trading); solo se carga con consentimiento
   clarityId: '',     // ID de proyecto de Microsoft Clarity
+
+  /* Conversiones de Google Ads del estudio (send_to = ID/etiqueta). Solo se envían si el
+     visitante aceptó la publicidad en el aviso de cookies. */
+  adsConversions: {
+    formulario: 'AW-1038334780/39WjCNubz7sdELz2ju8D',   // Estudio · Formulario enviado
+    contacto:   'AW-1038334780/jVSwCNPM1rsdELz2ju8D'    // Estudio · Clic teléfono o WhatsApp
+  },
 
   /* Endpoint del formulario. Vacío = modo demostración (valida y muestra la
      confirmación sin enviar nada). Para conectarlo, indica una URL que acepte
