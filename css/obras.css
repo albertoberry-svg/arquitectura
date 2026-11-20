@@ -1,0 +1,34 @@
+/* Páginas de «Obra construida». Se apoya en las clases del blog (estilos.css). */
+.obra__portada{margin:1.5rem 0 2rem}
+.obra__portada img,.obra__foto img{display:block;width:100%;height:auto;border-radius:2px}
+.obra__portada figcaption,.obra__foto figcaption{margin-top:.6rem;font-size:.9rem;opacity:.75}
+.obra__ficha{margin:0 0 2.5rem;padding:1.6rem 0;border-top:1px solid rgba(168,137,89,.55);border-bottom:1px solid rgba(168,137,89,.55)}
+.obra__ficha dl{margin:0}
+.obra__ficha dt,.obra__etq{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;opacity:.65;margin:0 0 .3rem}
+.obra__ficha dd{margin:0;font-size:1.05rem;line-height:1.35}
+.obra__datos{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem 1.5rem}
+.obra__datos div,.obra__equipo div{margin:0}
+.obra__trabajo{margin:1.6rem 0 0;padding-top:1.4rem;border-top:1px solid rgba(168,137,89,.25)}
+.obra__chips{list-style:none;margin:.2rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem .6rem}
+.obra__chips li{margin:0;padding:.35rem .8rem;border:1px solid rgba(168,137,89,.6);border-radius:999px;font-size:.92rem;line-height:1.3}
+.obra__equipo{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid rgba(168,137,89,.25)}
+@media (min-width:700px){
+  .obra__datos{grid-template-columns:repeat(4,1fr)}
+  .obra__equipo{grid-template-columns:repeat(3,1fr)}
+}
+.obra__texto{max-width:46rem;margin-inline:auto}
+.obra__cita{max-width:46rem;margin:2.5rem auto;padding:0 0 0 1.4rem;border-left:2px solid rgba(168,137,89,.8);font-size:1.25rem;font-style:italic}
+.obra__cita cite{display:block;margin-top:.6rem;font-size:.9rem;font-style:normal;opacity:.7}
+.obra__galeria{display:grid;gap:2rem;margin:3rem 0}
+@media (min-width:900px){
+  .obra__galeria{grid-template-columns:repeat(2,1fr)}
+  .obra__foto:not(.obra__foto--v):nth-child(3n+1){grid-column:1 / -1}
+}
+.obra__fotos{margin:3rem 0}
+.obra__grupo{margin:0 0 3rem}
+.obra__momento{font-size:1.5rem;margin:0 0 1.2rem;padding-bottom:.6rem;border-bottom:1px solid rgba(168,137,89,.55)}
+.obra__grupo .obra__galeria{margin:0}
+.obra__chips li::before,.obra__chips li::marker{content:none;display:none}
+.obra__chips li{padding-left:.8rem;list-style:none}
+.obra__equipo{margin-top:1.4rem}
+.obra__ficha .obra__chips{margin-left:0;margin-inline-start:0;padding:0}.obra__ficha .obra__chips li{margin-left:0}
