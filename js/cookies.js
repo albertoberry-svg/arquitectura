@@ -15,7 +15,12 @@
     if (v.ads && C.googleAdsId && !loaded.ads) {
       loaded.ads = true;
       addScript('https://www.googletagmanager.com/gtag/js?id=' + C.googleAdsId);
-      addScript(null, 'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","' + C.googleAdsId + '");');
+      /* Modo de consentimiento v2 (obligatorio en el EEE): por defecto todo denegado y,
+         como solo llegamos aquí si el visitante aceptó la publicidad, se concede ads. */
+      addScript(null, 'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}'
+        + 'gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied"});'
+        + 'gtag("consent","update",{ad_storage:"granted",ad_user_data:"granted",ad_personalization:"granted"});'
+        + 'gtag("js",new Date());gtag("config","' + C.googleAdsId + '");');
     }
     if (v.analytics && C.clarityId && !loaded.clarity) {
       loaded.clarity = true;
