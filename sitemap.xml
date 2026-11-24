@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sebastiangilarquitectos.com/</loc><lastmod>2026-11-20</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://sebastiangilarquitectos.com/estudio.html</loc><lastmod>2026-11-24</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://sebastiangilarquitectos.com/contacto.html</loc><lastmod>2026-11-24</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://sebastiangilarquitectos.com/vivienda-passivhaus.html</loc><lastmod>2026-11-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://sebastiangilarquitectos.com/blog/</loc><lastmod>2026-11-20</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://sebastiangilarquitectos.com/blog/casas-industrializadas-que-son-y-como-acertar.html</loc><lastmod>2026-11-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://sebastiangilarquitectos.com/blog/que-hace-un-arquitecto-en-una-vivienda-unifamiliar.html</loc><lastmod>2026-11-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
